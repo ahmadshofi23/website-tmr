@@ -44,7 +44,7 @@
         </div>
 
         @if(Auth::check())
-            <button type="submit" class="btn btn-primary">Lanjutkan Pembayaran</button>
+            <button type="submit" class="btn btn-primary">Lanjutkan Pemesanan</button>
         @else
             <a href="{{ route('login') }}" class="btn btn-warning">Login untuk Melanjutkan</a>
         @endif

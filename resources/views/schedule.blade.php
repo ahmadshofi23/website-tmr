@@ -15,6 +15,7 @@
                     <tr>
                         <th>Rute</th>
                         <th>Jam Pagi</th>
+                        <th>Jam Sore</th>
                         <th>Jam Malam</th>
                         <th>Durasi</th>
                     </tr>
@@ -22,14 +23,16 @@
                 <tbody class="text-center">
                     <tr>
                         <td>Medan → Rantau Prapat</td>
-                        <td>07:00 WIB</td>
-                        <td>19:00 WIB</td>
+                        <td>11:00 WIB</td>
+                        <td>14:00 WIB</td>
+                        <td>21:00 WIB</td>
                         <td>± 7-8 Jam</td>
                     </tr>
                     <tr>
                         <td>Rantau Prapat → Medan</td>
-                        <td>07:00 WIB</td>
-                        <td>19:00 WIB</td>
+                        <td>11:00 WIB</td>
+                        <td>14:00 WIB</td>
+                        <td>21:00 WIB</td>
                         <td>± 7-8 Jam</td>
                     </tr>
                 </tbody>

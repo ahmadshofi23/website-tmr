@@ -178,13 +178,14 @@
     <div class="pt-5">
         <h3 class="text-center fw-bold mb-4">Galeri Armada Kami</h3>
         <div class="row g-3">
-            @foreach (["armada1.jpg", "armada2.jpg", "armada3.jpg", "armada4.jpg"] as $img)
+            @php $armadas = \App\Models\Armada::all(); @endphp
+            @foreach ($armadas as $armada)
                 <div class="col-sm-6 col-md-3">
-                    <img src="{{ asset('assets/img/armada/' . $img) }}" 
-                         class="img-fluid rounded gallery-image shadow-sm" 
-                         data-bs-toggle="modal" 
-                         data-bs-target="#modal{{ $loop->index }}"
-                         alt="Armada TMR {{ $loop->iteration }}">
+                    <img src="{{ asset('assets/img/armada/' . $armada->image_path) }}"
+                        class="img-fluid rounded gallery-image shadow-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal{{ $loop->index }}"
+                        alt="Armada TMR {{ $loop->iteration }}">
                 </div>
 
                 <!-- Modal -->
@@ -192,12 +193,13 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-body p-0">
-                                <img src="{{ asset('assets/img/armada/' . $img) }}" class="img-fluid rounded" alt="Armada TMR Full View">
+                                <img src="{{ asset('assets/img/armada/' . $armada->image_path) }}" class="img-fluid rounded" alt="Armada TMR Full View">
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+
         </div>
     </div>
 </div>
