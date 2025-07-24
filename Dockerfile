@@ -20,8 +20,12 @@ RUN composer install --no-dev --optimize-autoloader
 # Give write permission
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
+# Copy start script
+COPY start-container.sh /start-container.sh
+RUN chmod +x /start-container.sh
+
 # Expose port
 EXPOSE 9000
 
-# Start PHP-FPM
-CMD ["php-fpm"]
+# Jalankan script
+CMD ["/start-container.sh"]
