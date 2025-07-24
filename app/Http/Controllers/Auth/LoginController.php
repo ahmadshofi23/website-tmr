@@ -31,8 +31,14 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
 
-            // Redirect ke halaman intended (misalnya kalau sebelumnya akses halaman /admin/*)
-            return redirect()->intended('/admin/home');
+            $user = Auth::user();
+
+            // Redirect berdasarkan role
+            if ($user->role === 'admin') {
+                return redirect()->intended('/admin/home');
+            } else {
+                return redirect()->intended('/'); // Halaman customer biasa
+            }
         }
 
         return back()->withErrors([

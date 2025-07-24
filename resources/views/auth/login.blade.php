@@ -31,6 +31,12 @@
             </div>
             <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Login</button>
         </form>
+
+        <!-- Link ke halaman register -->
+        <div class="mt-4 text-center text-sm text-gray-600">
+            Belum punya akun? 
+            <a href="{{ route('register') }}" class="text-blue-600 hover:underline">Daftar di sini</a>
+        </div>
     </div>
 </body>
 </html>

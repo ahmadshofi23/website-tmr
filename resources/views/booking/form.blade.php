@@ -43,7 +43,12 @@
             <input type="text" id="total_harga" class="form-control" readonly>
         </div>
 
-        <button type="submit" class="btn btn-success">Lanjut ke Pembayaran</button>
+        @if(Auth::check())
+            <button type="submit" class="btn btn-primary">Lanjutkan Pembayaran</button>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-warning">Login untuk Melanjutkan</a>
+        @endif
+
     </form>
 </div>
 

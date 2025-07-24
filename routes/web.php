@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\RouteTripController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 });
+
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 // ==========================
 // Authenticated Routes
@@ -58,9 +62,11 @@ Route::get('/trip/{slug}', [AdminTripController::class, 'show'])->name('trip.det
 // Admin Area (dengan auth)
 // ==========================
 
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
     // Dashboard
-    Route::get('/home', [AdminController::class, 'index'])->name('home');\
+    Route::get('/home', [AdminController::class, 'index'])->name('home');
+
+    // Hapus booking
     Route::delete('/bookings/{id}', [AdminController::class, 'destroy'])->name('bookings.destroy');
 
     // Route trip management
@@ -68,10 +74,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     // Trip management
     Route::resource('trips', AdminTripController::class)->except(['show']);
-
-    // (Opsional) Custom Edit & Update untuk RouteTrip jika resource perlu override
-    Route::get('/routes/{id}/edit', [RouteTripController::class, 'edit'])->name('routes.edit');
-    Route::put('/routes/{id}', [RouteTripController::class, 'update'])->name('routes.update');
 });
 
 
@@ -82,3 +84,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 Route::get('/login', function () {
     return view('auth.login'); // Pastikan file resources/views/auth/login.blade.php tersedia
 })->name('login');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
