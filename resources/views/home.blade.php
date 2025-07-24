@@ -25,6 +25,13 @@
     }
 </style>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 <!-- Carousel -->
 <!-- <div id="tmrCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -116,30 +123,52 @@
             </div>
         </div>
     </div>
-
+    
+    
     <!-- Katalog Perjalanan -->
     <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4">Katalog Perjalanan</h2>
+            <h2 class="text-center mb-4">Katalog Perjalanan Reguler</h2>
 
             <div class="row justify-content-center">
                 @php
-                    $routes = [
-                        ['from' => 'Rantau Prapat', 'to' => 'Medan', 'price' => 'Rp150.000'],
-                        ['from' => 'Medan', 'to' => 'Rantau Prapat', 'price' => 'Rp150.000'],
-                        ['from' => 'Medan', 'to' => 'Kisaran', 'price' => 'Rp100.000'],
-                    ];
+                    $routes = \App\Models\Route::all();
                 @endphp
 
                 @foreach($routes as $route)
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ $route['from'] }} → {{ $route['to'] }}</h5>
-                                <p class="card-text">Harga: <strong>{{ $route['price'] }}</strong></p>
-                                <a href="{{ route('booking.form', ['from' => $route['from'], 'to' => $route['to']]) }}" class="btn btn-primary">
-                                    Pesan Sekarang
-                                </a>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $route->from }} → {{ $route->to }}</h5>
+                            <p class="card-text">Harga: <strong>Rp{{ number_format($route->price, 0, ',', '.') }}</strong></p>
+                            <a href="{{ route('booking.form', ['from' => $route->from, 'to' => $route->to]) }}" class="btn btn-primary">
+                                Pesan Sekarang
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            </div>
+        </div>
+    </section>
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Private Trip</h2>
+            <div class="row justify-content-center">
+                @php
+                    $trips = \App\Models\Trip::all();
+                @endphp
+                @foreach ($trips as $trip)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm mb-4">
+                            <img src="{{ asset('storage/' . $trip->gambar) }}" class="card-img-top" alt="{{ $trip->title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $trip->title }}</h5>
+                                <p class="card-text">
+                                    {{ Str::limit($trip->deskripsi, 100) }}
+                                </p>
+                                <p><strong>Harga: Rp {{ number_format($trip->harga, 0, ',', '.') }}</strong></p>
+                                <a href="{{ route('trip.detail', $trip->slug) }}" class="btn btn-outline-primary w-100">Lihat Detail</a>
                             </div>
                         </div>
                     </div>
@@ -147,33 +176,7 @@
             </div>
         </div>
     </section>
-
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Paket Wisata</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm mb-4">
-                        <img src="{{ asset('assets/img/wisata/lake-toba.jpg') }}" class="card-img-top" alt="Danau Toba">
-                        <div class="card-body">
-                            <h5 class="card-title">Rantau Prapat → Danau Toba</h5>
-                            <p class="card-text">
-                                Nikmati keindahan Danau Toba dengan paket wisata full day dari Rantau Prapat. Sudah termasuk transportasi & dan biaya masuk wisata.
-                            </p>
-                            <p><strong>Harga: Rp 350.000 / orang</strong></p>
-                            <a href="{{ route('trip.detail', 'danau-toba') }}" class="btn btn-outline-primary w-100">Lihat Detail</a>
-
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Tambah paket lain di bawah sini jika ada --}}
-                {{-- ... --}}
-
-            </div>
-        </div>
-    </section>
-
+    
 
 
     <div class="mt-5 pt-5">

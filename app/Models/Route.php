@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
+class Route extends Model
 {
+    protected $table = 'routes';
+
     protected $fillable = [
-        'from', 'to', 'name', 'phone', 'date', 'jumlah_orang', 'total_harga'
+        'from', 'to', 'price'
     ];
-
 }
-

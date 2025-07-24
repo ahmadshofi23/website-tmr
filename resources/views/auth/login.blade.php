@@ -1,63 +1,36 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="w-full max-w-sm p-6 bg-white rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login Admin</h2>
 
-@section('title', 'Login')
-
-@section('content')
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="col-md-6">
-        <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-body p-5">
-                <h3 class="text-center mb-4">Login Admin</h3>
-
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input 
-                            type="email" 
-                            class="form-control @error('email') is-invalid @enderror" 
-                            id="email" 
-                            name="email" 
-                            value="{{ old('email') }}" 
-                            required 
-                            autofocus
-                        >
-                        @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input 
-                            type="password" 
-                            class="form-control @error('password') is-invalid @enderror" 
-                            id="password" 
-                            name="password" 
-                            required
-                        >
-                        @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                </form>
-
-                <div class="mt-3 text-center">
-                    <a href="{{ url('/') }}" class="text-muted">← Kembali ke beranda</a>
-                </div>
+        @if($errors->any())
+            <div class="mb-4 text-red-600 text-sm">
+                {{ $errors->first() }}
             </div>
-        </div>
+        @endif
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-1">Email</label>
+                <input type="email" name="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-1">Password</label>
+                <input type="password" name="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring" required>
+            </div>
+            <div class="mb-4 flex items-center">
+                <input type="checkbox" name="remember" id="remember" class="mr-2">
+                <label for="remember" class="text-sm text-gray-600">Ingat saya</label>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Login</button>
+        </form>
     </div>
-</div>
-@endsection
+</body>
+</html>
