@@ -1,9 +1,10 @@
-FROM php:8.2-fpm
+# Base image PHP
+FROM php:8.2-cli
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    git unzip zip curl libzip-dev libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -11,21 +12,20 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy project files
+# Copy source code
 COPY . .
 
-# Install PHP dependencies
+# Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Give write permission
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# Laravel optimization
+RUN php artisan config:clear && \
+    php artisan route:clear && \
+    php artisan view:clear && \
+    php artisan storage:link || true
 
-# Copy start script
-COPY start-container.sh /start-container.sh
-RUN chmod +x /start-container.sh
+# Expose Railway port
+EXPOSE 8080
 
-# Expose port
-EXPOSE 9000
-
-# Jalankan script
-CMD ["/start-container.sh"]
+# Default CMD to run Laravel app
+CMD php artisan serve --host=0.0.0.0 --port=${PORT}
