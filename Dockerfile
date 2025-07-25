@@ -28,7 +28,7 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
 # Expose port 3000 for Railway
-ENV PORT=8080
 EXPOSE 8080
 
-CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
+# Start Laravel dev server
+CMD php artisan serve --host=0.0.0.0 --port=8080
