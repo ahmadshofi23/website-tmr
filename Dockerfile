@@ -8,16 +8,16 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set work directory in container
+# Set working directory
 WORKDIR /var/www
 
-# Copy source code
+# Copy project files
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Prepare Laravel: cache config/routes/views & link storage
+# Prepare Laravel
 RUN php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache \
@@ -27,8 +27,8 @@ RUN php artisan config:cache \
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
-# Expose port 3000 for Railway
-EXPOSE 3000
+# Railway akan otomatis inject $PORT, gunakan itu saat run
+ENV PORT=8080
+EXPOSE 8080
 
-# Start Laravel dev server
-CMD php artisan serve --host=0.0.0.0 --port=3000
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
