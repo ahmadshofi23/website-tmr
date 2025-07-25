@@ -52,7 +52,7 @@
             @forelse ($armadas as $armada)
             <div class="col-sm-6 col-md-3">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('storage/trip/' . $armada->image_path) }}" class="card-img-top" alt="Armada">
+                    <img src="{{ asset('storage/armada/' . $armada->image_path) }}" class="card-img-top" alt="Armada">
 
                     <div class="card-body text-center">
                         <form action="{{ route('admin.armadas.destroy', $armada->id) }}" method="POST" onsubmit="return confirm('Hapus gambar ini?')">
