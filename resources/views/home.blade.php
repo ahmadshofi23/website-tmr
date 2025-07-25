@@ -138,7 +138,7 @@
             @foreach ($trips as $trip)
                 <div class="col-md-6 col-lg-4">
                     <div class="card shadow-sm h-100">
-                        <img src="{{ asset('storage/trip' . $trip->gambar) }}" class="card-img-top" alt="{{ $trip->title }}">
+                        <img src="{{ asset('storage/' . $trip->gambar) }}" class="card-img-top" alt="{{ $trip->title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $trip->title }}</h5>
                             <p class="card-text">{{ Str::limit($trip->deskripsi, 100) }}</p>
