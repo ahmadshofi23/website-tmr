@@ -28,7 +28,7 @@ class ArmadaController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/img/armada'), $filename);
+            $file->storeAs('armada', $filename, 'public');
 
             Armada::create([
                 'image_path' => $filename,
