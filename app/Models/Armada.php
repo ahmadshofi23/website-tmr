@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Armada extends Model
 {
-    protected $fillable = ['image_path'];
+    protected $fillable = ['image_path', 'cloudinary_public_id'];
+
 }

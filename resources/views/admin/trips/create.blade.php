@@ -36,7 +36,7 @@
                     <input type="file" name="gambar" class="form-control">
                     @if(isset($trip) && $trip->gambar)
                         <div class="mt-2">
-                            <img src="{{ asset('storage/' . $trip->gambar) }}" 
+                            <img src="{{ $trip->gambar }}" 
                                  class="img-thumbnail" style="max-width: 150px;" alt="Gambar Trip">
                         </div>
                     @endif

@@ -6,7 +6,7 @@
         {{-- Gambar Trip --}}
         <div class="col-md-7">
             <div class="card shadow-sm border-0">
-                <img src="{{ asset('storage/' . $trip->gambar) }}" class="card-img-top rounded-top" alt="{{ $trip->title }}">
+                <img src="{{ $trip->gambar }}" class="card-img-top rounded-top" alt="{{ $trip->title }}">
             </div>
         </div>
 

@@ -138,7 +138,7 @@
             @foreach ($trips as $trip)
                 <div class="col-md-6 col-lg-4">
                     <div class="card shadow-sm h-100">
-                        <img src="{{ asset('storage/' . $trip->gambar) }}" class="card-img-top" alt="{{ $trip->title }}">
+                        <img src="{{ $trip->gambar }}" class="card-img-top" alt="{{ $trip->title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $trip->title }}</h5>
                             <p class="card-text">{{ Str::limit($trip->deskripsi, 100) }}</p>
@@ -181,7 +181,7 @@
             @php $armadas = \App\Models\Armada::all(); @endphp
             @foreach ($armadas as $armada)
                 <div class="col-sm-6 col-md-3">
-                    <img src="{{ asset('storage/armada/' . $armada->image_path) }}"
+                    <img src="{{ $armada->image_path }}"
                         class="img-fluid rounded gallery-image shadow-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#modal{{ $loop->index }}"
@@ -193,7 +193,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-body p-0">
-                                <img src="{{ asset('storage/armada/' . $armada->image_path) }}" class="img-fluid rounded" alt="Armada TMR Full View">
+                                <img src="{{ $armada->image_path }}" class="img-fluid rounded" alt="Armada TMR Full View">
                             </div>
                         </div>
                     </div>

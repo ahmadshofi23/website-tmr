@@ -7,6 +7,7 @@ use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class TripController extends Controller
 {
@@ -41,8 +42,10 @@ class TripController extends Controller
         $trip->destinasi = explode(',', $request->destinasi);
 
         if ($request->hasFile('gambar')) {
-            $trip->gambar = $request->file('gambar')->store('trips', 'public');
+            $uploadedFileUrl = Cloudinary::upload($request->file('gambar')->getRealPath())->getSecurePath();
+            $trip->gambar = $uploadedFileUrl;
         }
+
 
         $trip->save();
 
@@ -73,14 +76,11 @@ class TripController extends Controller
         $trip->destinasi = explode(',', $request->destinasi);
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            if ($trip->gambar && Storage::disk('public')->exists($trip->gambar)) {
-                Storage::disk('public')->delete($trip->gambar);
-            }
-
-            // Simpan gambar baru
-            $trip->gambar = $request->file('gambar')->store('trips', 'public');
+            $uploadedFileUrl = Cloudinary::upload($request->file('gambar')->getRealPath())->getSecurePath();
+            $trip->gambar = $uploadedFileUrl;
         }
+
+
 
         $trip->save();
 
