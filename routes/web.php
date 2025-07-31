@@ -40,7 +40,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->
 // Halaman Publik (PageController)
 // ==========================
 
-Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/services', [PageController::class, 'services'])->name('services');
 Route::get('/schedule', [PageController::class, 'schedule'])->name('schedule');
