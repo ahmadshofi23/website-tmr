@@ -122,11 +122,11 @@
                         @endforeach
                     </div>
 
-                    <div class="mb-4">
+                    <!-- <div class="mb-4">
                         <i class="bi bi-cash-stack text-warning me-2"></i>
                         <strong>Harga:</strong> <br>
                         <span class="fs-4 text-primary fw-bold">Rp {{ number_format($trip->harga, 0, ',', '.') }}</span>
-                    </div>
+                    </div> -->
 
                     <div class="mb-4">
                         <i class="bi bi-check2-circle text-primary me-2"></i>

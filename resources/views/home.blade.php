@@ -268,11 +268,11 @@
                             <i class="bi bi-geo-alt-fill fs-3"></i>
                         </div>
                         <h5 class="fw-bold mb-1">{{ $route->from }} → {{ $route->to }}</h5>
-                        <p class="mb-3 text-secondary small">
+                        <!-- <p class="mb-3 text-secondary small">
                             Harga mulai <br>
                             <span class="fw-bold text-dark fs-5">Rp {{ number_format($route->price, 0, ',', '.') }}</span>
-                        </p>
-                        <a href="{{ route('booking.form', ['from' => $route->from, 'to' => $route->to]) }}" 
+                        </p> -->
+                        <a href="https://wa.me/6285174317334?text=Halo%20TMR%20Travel%2C%20saya%20ingin%20booking%20travel%20dari%20{{$route->from}}%20Dengan%20Tujuan {{$route->to}}" 
                         class="btn btn-gradient rounded-pill px-4 py-2 fw-semibold shadow-sm mt-auto">
                             Pesan Sekarang
                         </a>
@@ -306,7 +306,7 @@
                         <div class="card-body text-center p-4 flex-grow-1 d-flex flex-column">
                             <h5 class="fw-bold mb-2">{{ $trip->title }}</h5>
                             <p class="text-muted small mb-3 flex-grow-1">{{ Str::limit($trip->deskripsi, 90) }}</p>
-                            <p class="fw-bold fs-6 text-primary mb-0">Rp {{ number_format($trip->harga, 0, ',', '.') }}</p>
+                            <!-- <p class="fw-bold fs-6 text-primary mb-0">Rp {{ number_format($trip->harga, 0, ',', '.') }}</p> -->
                         </div>
 
                     </div>
